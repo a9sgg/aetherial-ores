@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "aetherialores",
+  "version": "${version}",
+  "name": "Aetherial Ores",
+  "description": "Mystical floating ores, rare deepslate veins, high-tier celestial metallurgy and glowing crystal toolsets.",
+  "authors": [
+    "Fabric Developer"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "sources": "https://github.com/example/aetherialores"
+  },
+  "license": "MIT",
+  "icon": "assets/aetherialores/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.aetherialores.AetherialOres"
+    ],
+    "client": [
+      "net.aetherialores.AetherialOresClient"
+    ]
+  },
+  "mixins": [
+    "aetherialores.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

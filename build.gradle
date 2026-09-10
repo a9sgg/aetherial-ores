@@ -6,18 +6,28 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+base {
+    archivesName = project.archives_base_name
+}
+
 repositories {
+    mavenCentral()
+    maven { name = "Fabric"; url = "https://maven.fabricmc.net/" }
 }
 
 dependencies {
+    // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Fabric API
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 }
 
 processResources {
     inputs.property "version", project.version
+
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
@@ -25,10 +35,18 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 21
+    it.options.encoding = "UTF-8"
 }
 
 java {
-    withSourcesJar()
+    // Fabric 1.21 targets Java 21 LTS
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}"}
+    }
 }
