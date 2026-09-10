@@ -1,1 +1,12 @@
-rootProject.name = 'aetherial_ores'
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'aetherial-ores'
