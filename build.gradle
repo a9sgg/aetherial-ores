@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.7
+    id 'fabric-loom' version '1.7'
     id 'maven-publish'
 }
 
@@ -36,10 +36,4 @@ java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
     withSourcesJar()
-}
-
-jar {
-    from("LICENSE") {
-        include "the-file-name-here"
-    }
 }
