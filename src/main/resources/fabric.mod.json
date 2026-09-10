@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "aetherial_ores",
+  "version": "1.0.0",
+  "name": "Aetherial Ores",
+  "description": "Adds Aetherium ores, ingots, and templates.",
+  "authors": [
+    "a9sgg"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.aetherialores.AetherialOres"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "~1.21",
+    "java": ">=21"
+  }
+}
+
