@@ -1,0 +1,10 @@
+{
+  "block.aetherial-ores.aetherium_ore": "Aetherium Ore",
+  "block.aetherial-ores.aetherium_block": "Aetherium Block",
+  "block.aetherial-ores.voidsteel_ore": "Voidsteel Ore",
+  "block.aetherial-ores.voidsteel_block": "Voidsteel Block",
+  "block.aetherial-ores.chronocite_ore": "Chronocite Ore",
+  "block.aetherial-ores.chronocite_block": "Chronocite Block",
+  "itemGroup.aetherial-ores.main": "Aetherial Ores"
+}
+
