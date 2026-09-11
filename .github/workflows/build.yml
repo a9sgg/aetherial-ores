@@ -32,6 +32,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: AetherialOres-Mod-1.21
-        path: build/libs/*.jar
+        path: build/libs/aetherial-ores-1.0.0.jar
         if-no-files-found: error
         
