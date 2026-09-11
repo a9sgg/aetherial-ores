@@ -25,12 +25,12 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Build Mod Jar
+      run: ./gradlew remapJar
 
     - name: Upload Mod Jar
       uses: actions/upload-artifact@v4
       with:
-        name: AetherialOres-Mod
-        path: build/libs/*.jar
+        name: AetherialOres-Mod-1.21
+        path: build/libs/aetherial-ores-*.jar
         
