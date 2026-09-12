@@ -1,51 +1,37 @@
-package net.aetherialores;
+package net.aetherialores.block;
 
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.aetherialores.AetherialOresMod;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class AetherialOresMod implements ModInitializer {
-    public static final String MOD_ID = "aetherial_ores";
+public class ModBlocks {
 
-    // تسجيل الـ Dusts والـ Ingots لكل المعادن (أثيريوم، فويدستيل، كرونوكايت)
-    public static final Item AETHERIUM_DUST = registerItem("aetherium_dust", new Item(new Item.Settings()));
-    public static final Item AETHERIUM_INGOT = registerItem("aetherium_ingot", new Item(new Item.Settings()));
+    // تسجيل الأورات الثلاثة بصلابة توافق التدرج المطلوب
+    public static final Block AETHERIUM_ORE = registerBlock("aetherium_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(4.0f).requiresTool()));
+    public static final Block VOIDSTEEL_ORE = registerBlock("voidsteel_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE).strength(6.0f).requiresTool()));
+    public static final Block CHRONOCITE_ORE = registerBlock("chronocite_ore",
+            new Block(FabricBlockSettings.copyOf(Blocks.OBSIDIAN).strength(50.0f).requiresTool()));
 
-    public static final Item VOIDSTEEL_DUST = registerItem("voidsteel_dust", new Item(new Item.Settings()));
-    public static final Item VOIDSTEEL_INGOT = registerItem("voidsteel_ingot", new Item(new Item.Settings().fireproof()));
-
-    public static final Item CHRONOCITE_DUST = registerItem("chronocite_dust", new Item(new Item.Settings()));
-    public static final Item CHRONOCITE_INGOT = registerItem("chronocite_ingot", new Item(new Item.Settings().fireproof()));
-
-    public static final ItemGroup AETHERIAL_GROUP = Registry.register(
-            Registries.ITEM_GROUP,
-            Identifier.of(MOD_ID, "aetherial_group"),
-            FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(CHRONOCITE_INGOT))
-                    .displayName(Text.translatable("itemgroup.aetherial_ores.aetherial_group"))
-                    .entries((displayContext, entries) -> {
-                        entries.add(AETHERIUM_DUST);
-                        entries.add(AETHERIUM_INGOT);
-                        entries.add(VOIDSTEEL_DUST);
-                        entries.add(VOIDSTEEL_INGOT);
-                        entries.add(CHRONOCITE_DUST);
-                        entries.add(CHRONOCITE_INGOT);
-                    })
-                    .build()
-    );
-
-    @Override
-    public void onInitialize() {
-        System.out.println("Aetherial Ores Mod Initialized successfully for Minecraft 1.21.11!");
+    private static Block registerBlock(String name, Block block) {
+        registerBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, Identifier.of(AetherialOresMod.MOD_ID, name), block);
     }
 
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(MOD_ID, name), item);
+    private static Item registerBlockItem(String name, Block block) {
+        return Registry.register(Registries.ITEM, Identifier.of(AetherialOresMod.MOD_ID, name),
+                new BlockItem(block, new Item.Settings()));
+    }
+
+    public static void registerModBlocks() {
+        System.out.println("Registering Mod Blocks for " + AetherialOresMod.MOD_ID);
     }
 }
