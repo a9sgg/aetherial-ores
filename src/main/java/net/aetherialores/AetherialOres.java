@@ -1,38 +1,51 @@
-package net.a9sgg.aetherialores;
+package net.aetherialores;
 
-import net.a9sgg.aetherialores.registry.ModBlocks;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.ItemGroups;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
-public class AetherialOres implements ModInitializer {
+public class AetherialOresMod implements ModInitializer {
+    public static final String MOD_ID = "aetherial_ores";
 
-	public static final String MOD_ID = "aetherial-ores";
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    // تسجيل الـ Dusts والـ Ingots لكل المعادن (أثيريوم، فويدستيل، كرونوكايت)
+    public static final Item AETHERIUM_DUST = registerItem("aetherium_dust", new Item(new Item.Settings()));
+    public static final Item AETHERIUM_INGOT = registerItem("aetherium_ingot", new Item(new Item.Settings()));
 
-	@Override
-	public void onInitialize() {
-		LOGGER.info("[{}] Initializing...", MOD_ID);
+    public static final Item VOIDSTEEL_DUST = registerItem("voidsteel_dust", new Item(new Item.Settings()));
+    public static final Item VOIDSTEEL_INGOT = registerItem("voidsteel_ingot", new Item(new Item.Settings().fireproof()));
 
-		// Register all blocks + block items
-		ModBlocks.registerBlocks();
+    public static final Item CHRONOCITE_DUST = registerItem("chronocite_dust", new Item(new Item.Settings()));
+    public static final Item CHRONOCITE_INGOT = registerItem("chronocite_ingot", new Item(new Item.Settings().fireproof()));
 
-		// Add ore blocks to the "Natural" creative tab
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
-			entries.add(ModBlocks.AETHERIUM_ORE);
-			entries.add(ModBlocks.VOIDSTEEL_ORE);
-			entries.add(ModBlocks.CHRONOCITE_ORE);
-		});
+    public static final ItemGroup AETHERIAL_GROUP = Registry.register(
+            Registries.ITEM_GROUP,
+            Identifier.of(MOD_ID, "aetherial_group"),
+            FabricItemGroup.builder()
+                    .icon(() -> new ItemStack(CHRONOCITE_INGOT))
+                    .displayName(Text.translatable("itemgroup.aetherial_ores.aetherial_group"))
+                    .entries((displayContext, entries) -> {
+                        entries.add(AETHERIUM_DUST);
+                        entries.add(AETHERIUM_INGOT);
+                        entries.add(VOIDSTEEL_DUST);
+                        entries.add(VOIDSTEEL_INGOT);
+                        entries.add(CHRONOCITE_DUST);
+                        entries.add(CHRONOCITE_INGOT);
+                    })
+                    .build()
+    );
 
-		// Add refined blocks to the "Building Blocks" creative tab
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-			entries.add(ModBlocks.AETHERIUM_BLOCK);
-			entries.add(ModBlocks.VOIDSTEEL_BLOCK);
-			entries.add(ModBlocks.CHRONOCITE_BLOCK);
-		});
+    @Override
+    public void onInitialize() {
+        System.out.println("Aetherial Ores Mod Initialized successfully for Minecraft 1.21.11!");
+    }
 
-		LOGGER.info("[{}] Initialization complete.", MOD_ID);
-	}
+    private static Item registerItem(String name, Item item) {
+        return Registry.register(Registries.ITEM, Identifier.of(MOD_ID, name), item);
+    }
 }
