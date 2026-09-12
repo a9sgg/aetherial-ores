@@ -1,25 +1,25 @@
 {
-  "schemaVersion": 1,
+  "schema_version": 1,
   "id": "aetherial_ores",
   "version": "${version}",
   "name": "Aetherial Ores",
-  "description": "Adds new tier ores and blocks to Minecraft Fabric 1.21",
+  "description": "The ultimate multi-tier material mod featuring Aetherium, Voidsteel, and Chronocite for 1.21.11!",
   "authors": [
-    "a9sgg"
+    "Awsy"
   ],
-  "contact": {},
+  "contact": {
+    "sources": "https://github.com/a9sgg/aetherial-ores"
+  },
   "license": "MIT",
-  "icon": "assets/aetherial_ores/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.a9sgg.aetherialores.AetherialOres"
+      "net.aetherialores.AetherialOresMod"
     ]
   },
-  "mixins": [],
   "depends": {
-    "fabricloader": ">=0.15.11",
-    "minecraft": "~1.21",
+    "fabricloader": ">=0.18.1",
+    "minecraft": "~1.21.11",
     "java": ">=21",
     "fabric-api": "*"
   }
